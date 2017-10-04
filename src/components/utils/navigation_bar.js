@@ -39,9 +39,7 @@ class NavigationBar extends Component {
 	}
 
 	renderClubLinks() {
-		console.log("THIS CLUBs", this.props)
 		return _.map(this.props.navBarClubs, club => {
-			console.log("CLUB", club)
 			return (
 				<div>
 						<li className="" key={club.name}><Link to={`/clubs/${club.name}`}>{club.name}</Link> </li>
@@ -51,7 +49,6 @@ class NavigationBar extends Component {
 	}
 
 	render() {
-		// console.log("clubs", this.props.clubs)
 		return (
 			<div>
 			<div>
@@ -107,7 +104,6 @@ class NavigationBar extends Component {
 
 function mapStateToProps(state){
 	var self = this;
-	console.log("club state", state)
 	return { navBarClubs: state.navBarClubs }
 }
 export default connect(mapStateToProps, { fetchClubs })(NavigationBar);

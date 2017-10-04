@@ -22,6 +22,7 @@ export function addEventImageFile(file, name) {
 
 //Gives user the ability to create an event with a corresponding image, date, and details
 export function createEvent(values, file, date) {
+	console.log("date sent", date)
 	const eventImagesRef = storage.ref().child('/eventImages/' + file.name);
 	//Push event to image to firebase database
 	eventImagesRef.put(file).then(function(snapshot){

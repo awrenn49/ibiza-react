@@ -34,7 +34,6 @@ class ClubImages extends Component {
 					var imageObjectKey = Object.keys(image)[0];
 					var imageURL = image[imageObjectKey].fileURL;
 					return <Image src={imageURL} className="event-image" responsive/>
-					debugger					
 				}
 			}
 

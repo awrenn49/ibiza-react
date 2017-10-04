@@ -1,5 +1,8 @@
 
 
+.home {
+  background-color: #e9ebee;
+}
 .event {
 	margin: 20px;
 	text-align: center;
@@ -15,6 +18,9 @@
 	text-align: center;
 }
  
+
+
+//navigation bar
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
 body {
   font-family: 'Open Sans', 'sans-serif';
@@ -51,22 +57,12 @@ body {
   line-height: 30px;
 }
 
-.carousel-control {
-  width: 30px;
-  height: 30px;
-  top: -35px;
+
+.home {
+  
+  height: 100%;
 
 }
-.left.carousel-control {
-  right: 30px;
-  left: inherit;
-}
-.carousel-control .glyphicon-chevron-left, 
-.carousel-control .glyphicon-chevron-right {
-  font-size: 12px;
-  background-color: #fff;
-  line-height: 30px;
-  text-shadow: none;
-  color: #333;
-  border: 1px solid #ddd;
-}
+
+
+.top-buffer { margin-top:20px; }

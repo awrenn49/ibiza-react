@@ -3,35 +3,26 @@ import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 
-// import css from 'file.css';
-
-
 import { createEvent } from '../../actions/events/events_action';
 
-// import DatePicker from 'react-datepicker';
-
-// import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from 'react-bootstrap-datetimepicker'
 import InfiniteCalendar from 'react-infinite-calendar';
 import 'react-infinite-calendar/styles.css';
 
 import moment from 'moment';
+import InputMoment from 'input-moment';
 import MyDropzone from '../utils/dropzone';
-
-
 
 class EventsNew extends Component {
 
 	constructor(props) {
 		super(props);
-
-		this.state = { file: '', date: ''};
+		this.state = { file: '', date: '', m: moment()};
 	}
 
 	renderField(field) {
 		const { meta: { touched, error } } = field;
-		const className = `form-group ${touched && error
-																			? 'has-danger' : ''}`
-
+		const className = `form-group ${touched && error ? 'has-danger' : ''}`
 
 		return (
 			<div className = { className }>
@@ -60,9 +51,11 @@ class EventsNew extends Component {
 
 	dateSelect(date){
 		console.log("date", date)
-		this.setState({date})
+		var moment = new Moment(date);
+		var formattedDate = moment.format()
+		console.log("formatted date", formattedDate)
+		this.setState({date : formattedDate})
 	}
-
 
 	render() {
 		const { handleSubmit } = this.props;
@@ -89,19 +82,15 @@ class EventsNew extends Component {
 					component={this.renderField}
 				/>
 				<MyDropzone onFileDrop={this.fileDrop.bind(this)}/>
+				<InputMoment
+          moment={this.state.m}
+          onChange={this.handleChange}
+          minStep={5}
+          onSave={this.handleSave}
+        />
 				<button type="submit" className="btn btn-primary">Submit</button>
 				<Link to="/" className="btn btn-danger">Cancel</Link>
-				<InfiniteCalendar 
-				label="Pick Event Date"
-				name="eventDate"
-				onSelect={this.dateSelect.bind(this)}
-			    width={400}
-			    height={300}
-			    selected={today}
-			    disabledDays={[0,6]}
-			    minDate={lastWeek} 
 
-			   />
 			</form>
 		);
 	}

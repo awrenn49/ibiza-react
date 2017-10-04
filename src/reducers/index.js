@@ -4,12 +4,14 @@ import ClubsReducer from './reducer_clubs';
 import EventsReducer from './reducer_events';
 import ImagesReducer from './reducer_images';
 import NavBarReducer from './reducer_nav_bar';
+import ClubReducer from './reducer_club';
 const rootReducer = combineReducers({
+  club: ClubReducer,
   clubs: ClubsReducer,
   events: EventsReducer,
+  form : formReducer,
   images: ImagesReducer,
   navBarClubs: NavBarReducer,
-  form : formReducer
 });
 
 export default rootReducer;

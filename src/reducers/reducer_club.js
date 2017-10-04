@@ -1,10 +1,11 @@
 import _ from 'underscore';
 
-import { FETCH_CLUB, FETCH_CLUBS, FETCH_CLUB_IMAGES } from '../actions/clubs/clubs_action';
+import { FETCH_CLUB } from '../actions/clubs/clubs_action';
 
 export default function(state = {}, action) {
 	switch (action.type) {
-		case FETCH_CLUB_IMAGES:
+		case FETCH_CLUB:
+			console.log("Club Payload", action.payload)
 			return action.payload
 	}
 	return state;

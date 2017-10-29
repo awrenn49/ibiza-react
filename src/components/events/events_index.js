@@ -4,9 +4,12 @@ import {Image, Grid, Row, Col} from 'react-bootstrap';
 import React, { Component } from 'react';
 import Fuse from 'fuse.js';
 
+import localForage from 'localforage';
+
 import { fetchEvents, fetchEvent, searchEvents } from '../../actions/events/events_action';
 import firebase from '../../actions/firebase';
 
+var firestore2 = require('firebase/firestore');
 import Event from './event';
 
 class EventsIndex extends Component {
@@ -16,7 +19,7 @@ class EventsIndex extends Component {
 		this.state = {
 			searchedEvent : '',
 			searchType: 'event',
-			searchLabel: 'Search Events'
+			searchLabel: 'Search By Events'
 		};
 		this.enterSearch = this.enterSearch.bind(this);
 		this.selectSearchType = this.selectSearchType.bind(this);
@@ -24,13 +27,16 @@ class EventsIndex extends Component {
 	}
 
 	componentWillMount() {
+		localForage.getItem('events').then(function(value){
+			console.log("removed", value)
+		})
+		localForage.remove
  		this.storage = firebase.storage();
 		this.props.fetchEvents(this.props.club);
 	} 
 
 	componentWillReceiveProps(nextProps) {
-
-		console.log("Next props", nextProps)
+		localForage.getItem
 		if(nextProps.club !== this.props.club){
 			this.props.fetchEvents(nextProps.club)
 		}
@@ -84,7 +90,6 @@ class EventsIndex extends Component {
 		var clubOption
 
 		// this.stateSet({events: this.props.events})
-		console.log("This Events", this.props.events)
 		let events = this.props.events;
 		let searchType = this.state.searchType;
 
@@ -100,22 +105,17 @@ class EventsIndex extends Component {
 			}
 		}
 
-		console.log("HERE NOWs", events.length)
-			if(events.length){
-				events.sort(this.dateSort)
-			}
-			// if(events){
-			// 	this.customSort(events)
-			// }
-		// events = this.customSort(events);
+		if(events.length){
+			events.sort(this.dateSort)
+		}
 
 		return _.map(events, event => {
 			return (
-				<div>
-						<li className="list-group-item event-item" >
-							<Event key={event.name} event={event} className="event-image"/>
-						</li>
-				</div>
+				<Grid key={event.name}>
+					<li className="list-group-item event-item" >
+						<Event key={event.name} event={event} date={event.date} className="event-image"/>
+					</li>
+				</Grid>
 			)
 		})
 	}
@@ -155,6 +155,7 @@ class EventsIndex extends Component {
 
 function mapStateToProps(state){
 	var self = this;
+	localForage.setItem('events', state.events);
 	return { events: state.events }
 }
-export default connect(mapStateToProps, { fetchEvents, searchEvents })(EventsIndex);
+export default connect(mapStateToProps, { fetchEvents })(EventsIndex);

@@ -8,6 +8,7 @@ import { createEvent } from '../../actions/events/events_action';
 import DatePicker from 'react-bootstrap-datetimepicker'
 import InfiniteCalendar from 'react-infinite-calendar';
 import 'react-infinite-calendar/styles.css';
+import 'input-moment/dist/input-moment.css';
 
 import moment from 'moment';
 import InputMoment from 'input-moment';
@@ -39,6 +40,15 @@ class EventsNew extends Component {
 		);
 	}
 
+  handleChange = m => {
+    this.setState({ m });
+  }
+
+  handleSave = () => {
+  	this.setState({date: this.state.m})
+    console.log('saved', this.state.m.format('llll'));
+  }
+
 	onSubmit(values){
 		 this.props.createEvent( values, this.state.file, this.state.date, () => {
 		 		this.props.history.push('/')
@@ -50,10 +60,8 @@ class EventsNew extends Component {
 	}
 
 	dateSelect(date){
-		console.log("date", date)
 		var moment = new Moment(date);
 		var formattedDate = moment.format()
-		console.log("formatted date", formattedDate)
 		this.setState({date : formattedDate})
 	}
 
@@ -82,7 +90,7 @@ class EventsNew extends Component {
 					component={this.renderField}
 				/>
 				<MyDropzone onFileDrop={this.fileDrop.bind(this)}/>
-				<InputMoment
+        <InputMoment
           moment={this.state.m}
           onChange={this.handleChange}
           minStep={5}

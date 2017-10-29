@@ -16,16 +16,21 @@ class NavigationBar extends Component {
 
 	componentDidMount(){
 		this.props.fetchClubs();
-		$(".dropdown").hover(            
-      function() {
-          $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideDown("400");
-          $(this).toggleClass('open');        
-      },
-      function() {
-          $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideUp("400");
-          $(this).toggleClass('open');       
-      }
-    );
+
+		console.log("nav bar props", this.props)
+		$(".dropdown").hover(    
+
+	      function() {
+    			if(!$(this).hasClass('open')){
+    				$('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideDown("400");
+	          $(this).toggleClass('open'); 
+					} else {
+    				$('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideUp("400");
+	          $(this).toggleClass('open'); 
+					}
+       
+	      }
+	    );
 	}
 
 	constructor(props) {
@@ -36,13 +41,14 @@ class NavigationBar extends Component {
 
 	onNavigationSelection(selection) {
 		this.props.history.push('/');
+
 	}
 
 	renderClubLinks() {
 		return _.map(this.props.navBarClubs, club => {
 			return (
-				<div>
-						<li className="" key={club.name}><Link to={`/clubs/${club.name}`}>{club.name}</Link> </li>
+				<div key={club.name}>
+					<li className="" key={club.name}><Link key={club.name} to={`/clubs/${club.name}`}>{club.name}</Link> </li>
 				</div>
 			)
 		})
@@ -67,15 +73,11 @@ class NavigationBar extends Component {
 						<ul className="nav navbar-nav">
 							<li className="dropdown mega-dropdown">
 								<a href="#" className="dropdown-toggle" data-toggle="dropdown">Clubs <span className="caret"></span></a>				
-								<ul className="dropdown-menu mega-dropdown-menu">
+								<ul id="firstList" className="dropdown-menu mega-dropdown-menu">
 									<li className="col-sm-3">
 										<ul>
 											<li className="dropdown-header">Clubs</li>
 											{this.renderClubLinks()}
-{/*											<li><Link to={'/events/new'}>Amnesia</Link></li>
-                      <li><a href="#">DC-10</a></li>
-                      <li><a href="#">Pacha</a></li>
-											<li><a href="#">Ushuaia</a></li>*/}
 										</ul>
 									</li>
 								</ul>				
@@ -84,7 +86,7 @@ class NavigationBar extends Component {
 				        <ul className="nav navbar-nav navbar-right">
 				        <li className="dropdown">
 				          <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My account <span className="caret"></span></a>
-				          <ul className="dropdown-menu" role="menu">
+				          <ul id="otherList" className="dropdown-menu" role="menu">
 				            <li><a href="#">Action</a></li>
 				            <li><a href="#">Another action</a></li>
 				            <li><a href="#">Something else here</a></li>
@@ -92,7 +94,9 @@ class NavigationBar extends Component {
 				            <li><a href="#">Separated link</a></li>
 				          </ul>
 				        </li>
-				        <li><a href="#">My cart (0) items</a></li>
+				        <li><Link to={'/ibiza_merchandise'}>Merchandise</Link></li>
+				        <li><Link to={'/explore_ibiza'}>Explore Ibiza</Link></li>
+				        <li><Link to={'/cart'} >My cart (0) items</Link></li>
 				      </ul>
 					</div>
 				  </nav>
@@ -104,7 +108,7 @@ class NavigationBar extends Component {
 
 function mapStateToProps(state){
 	var self = this;
-	return { navBarClubs: state.navBarClubs }
+	return { navBarClubs: state.navBarClubs, merchandiseCount: state.merchandise }
 }
 export default connect(mapStateToProps, { fetchClubs })(NavigationBar);
 

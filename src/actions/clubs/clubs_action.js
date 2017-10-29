@@ -1,5 +1,6 @@
 import async from 'async';
 import firebase from '../firebase';
+var firestore2 = require('firebase/firestore');
 
 export const CREATE_CLUB_IMAGE = 'create_club_image';
 export const FETCH_CLUB = 'fetch_club';
@@ -7,6 +8,7 @@ export const FETCH_CLUBS = 'fetch_clubs';
 
 const clubDB = firebase.database();
 const storage = firebase.storage();
+const firestore = firebase.firestore();
 
 export function createClubImage(values, file, date) {
 	const clubImagesRef = storage.ref().child(`/clubImages/${values.clubName}/` + file.name);
@@ -29,15 +31,12 @@ export function createClubImage(values, file, date) {
 }
 
 export function fetchClub(club) {
-	console.log("fetch club hit", club)
 	var clubLowerCase = club.toLowerCase();
 	let Club = clubDB.ref('clubs').orderByChild('name').equalTo(clubLowerCase);
-	console.log("CLUB", Club)
 	return dispatch => {
 		Club.on('value', snapshot => {
 			//After event(s) returned fetch the url of the file in Firebase Storage
 			async.map(snapshot.val(), function(club, callback) {
-				console.log("Club action", club)
 				const clubImageRef = storage.refFromURL(club.logoURL);
 				clubImageRef.getDownloadURL().then(url => {
 					club.url = url;
@@ -54,12 +53,16 @@ export function fetchClub(club) {
 }
 
 export function fetchClubs() {
-	const Club = clubDB.ref('clubs');
+	const Clubs = firestore.collection('clubs');
+	var clubs = [];
 	return dispatch => {
-		Club.on('value', snapshot => {
+		Clubs.get().then(querySnapshot => {
+			var data = querySnapshot.docs.map(function (documentSnapshot) {
+			  return documentSnapshot.data();
+			});
 			dispatch({
 				type: FETCH_CLUBS,
-				payload: snapshot.val()
+				payload: data
 			})
 		})
 	}

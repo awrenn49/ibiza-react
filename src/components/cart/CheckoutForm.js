@@ -52,42 +52,49 @@ class CheckoutForm extends React.Component {
   }
 
   render() {
-
+    console.log("checkout props", this.props)
     const { handleSubmit } = this.props;
     return (
       <Grid>
         <form onSubmit={ handleSubmit(this.onSubmit.bind(this))} className="card-section-form">
-          <Row>
-            <Col sm={3}>
-              <Field
-                label="First Name"
-                name="firstName"
-                component={this.renderField}
-              />
+          <div className="row-border-between">
+            <Col sm={6} className="test1">
+              <Row>
+                <Col sm={6}>
+                  <Field
+                    label="First Name"
+                    name="firstName"
+                    component={this.renderField}
+                  />
+                </Col>
+                <Col sm={6}>
+                  <Field
+                    label="Last Name"
+                    name="lastName"
+                    component={this.renderField}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col sm={12}>
+                  <Field
+                    label="Billing Address"
+                    name="billingAddress"
+                    component={this.renderField}
+                  />
+                </Col>
+              </Row>
+              <CardSection />
+              <Row>
+                <Col sm={8}>
+                  <button className="confirm-button">Confirm order</button>
+                </Col>
+              </Row>
             </Col>
-            <Col sm={3}>
-              <Field
-                label="Last Name"
-                name="lastName"
-                component={this.renderField}
-              />
+            <Col sm={6} className="test1">
+              <div>Test</div>
             </Col>
-          </Row>
-          <Row>
-            <Col sm={6}>
-              <Field
-                label="Billing Address"
-                name="billingAddress"
-                component={this.renderField}
-              />
-            </Col>
-          </Row>
-          <CardSection />
-          <Row>
-            <Col sm={4}>
-              <button className="confirm-button">Confirm order</button>
-            </Col>
-          </Row>
+          </div>
         </form>
       </Grid>
     );
@@ -110,7 +117,11 @@ function validate(values) {
   return errors;
 }
 
+function mapStateToProps(state){
+  return { merchandiseItems: state.merchandise.merchandiseItems }
+}
+
 export default reduxForm({
   validate,
   form: 'CheckoutForm'
-})( connect()(injectStripe(CheckoutForm)));
+})( connect(mapStateToProps)(injectStripe(CheckoutForm)));

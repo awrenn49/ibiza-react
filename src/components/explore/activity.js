@@ -8,8 +8,8 @@ const Activity = (props) => {
 
   return(
     <Col sm={4}>
-      <p>{props.description}</p>
-      <Image onClick={props.handleClick} value={props.description}  src={props.imageSource}className="activity-image margin-bottom-5"/>
+      <p className="activity-description">{props.description}</p>
+      <Image onClick={props.handleClick} value={props.description}  src={props.imageSource} className="activity-image margin-bottom-5"/>
     </Col>
   )
 }

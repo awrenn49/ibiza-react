@@ -2,9 +2,11 @@ import {Image, Grid, Row, Col} from 'react-bootstrap';
 import React, { Component } from 'react';
 import localForage from 'localforage';
 
+import Authorization from '../utils/Authorization';
+
 import Activity from './activity';
 
-export default class ExploreIbiza extends Component {
+class ExploreIbiza extends Component {
 	constructor(props){
 		super(props);
 		this.state = {}
@@ -32,3 +34,5 @@ export default class ExploreIbiza extends Component {
 		)
 	}
 }
+
+export default ExploreIbiza;

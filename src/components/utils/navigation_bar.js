@@ -48,13 +48,16 @@ class NavigationBar extends Component {
 		return _.map(this.props.navBarClubs, club => {
 			return (
 				<div key={club.name}>
-					<li className="" key={club.name}><Link key={club.name} to={`/clubs/${club.name}`}>{club.name}</Link> </li>
+					<li className="club-link" key={club.name}><Link key={club.name} to={`/clubs/${club.name}`}><a>{club.title}</a></Link> </li>
 				</div>
 			)
 		})
 	}
 
 	render() {
+
+		var {merchandiseCount} = this.props;
+
 		return (
 			<div>
 			<div>
@@ -73,7 +76,7 @@ class NavigationBar extends Component {
 						<ul className="nav navbar-nav">
 							<li className="dropdown mega-dropdown">
 								<a href="#" className="dropdown-toggle" data-toggle="dropdown">Clubs <span className="caret"></span></a>				
-								<ul id="firstList" className="dropdown-menu mega-dropdown-menu">
+								<ul className="dropdown-menu mega-dropdown-menu">
 									<li className="col-sm-3">
 										<ul>
 											<li className="dropdown-header">Clubs</li>
@@ -96,7 +99,7 @@ class NavigationBar extends Component {
 				        </li>
 				        <li><Link to={'/ibiza_merchandise'}>Merchandise</Link></li>
 				        <li><Link to={'/explore_ibiza'}>Explore Ibiza</Link></li>
-				        <li><Link to={'/cart'} >My cart (0) items</Link></li>
+				        <li><Link to={'/cart'} >My cart ({merchandiseCount}) items</Link></li>
 				      </ul>
 					</div>
 				  </nav>
@@ -108,7 +111,8 @@ class NavigationBar extends Component {
 
 function mapStateToProps(state){
 	var self = this;
-	return { navBarClubs: state.navBarClubs, merchandiseCount: state.merchandise }
+	console.log("state nav", state)
+	return { navBarClubs: state.navBarClubs, merchandiseCount: state.merchandise.merchandiseCount }
 }
 export default connect(mapStateToProps, { fetchClubs })(NavigationBar);
 

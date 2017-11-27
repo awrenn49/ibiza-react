@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {Image, Grid, Row, Col} from 'react-bootstrap';
 import React, { Component } from 'react';
 import Fuse from 'fuse.js';
+import sqip from 'sqip';
 
 import localForage from 'localforage';
 
@@ -27,21 +28,23 @@ class EventsIndex extends Component {
 	}
 
 	componentWillMount() {
-		localForage.getItem('events').then(function(value){
-			console.log("removed", value)
-		})
-		localForage.remove
  		this.storage = firebase.storage();
 		this.props.fetchEvents(this.props.club);
 	} 
 
 	componentWillReceiveProps(nextProps) {
-		localForage.getItem
 		if(nextProps.club !== this.props.club){
 			this.props.fetchEvents(nextProps.club)
 		}
 	}
 
+	//Not sure if used
+	enterSearch(e) {
+		// console.log("e key", e.key)
+		// if(e.key === 'Enter'){
+			this.setState({searchedEvent : e.target.value})
+		// }
+	}
 
 	//Sets the type of search to be conducted
 	selectSearchType(e) {
@@ -57,13 +60,6 @@ class EventsIndex extends Component {
 		}
 	}
 
-	//Not sure if used
-	enterSearch(e) {
-		// console.log("e key", e.key)
-		// if(e.key === 'Enter'){
-			this.setState({searchedEvent : e.target.value})
-		// }
-	}
 
 	//Sort events by most recent date
 	dateSort(a, b) {
@@ -86,8 +82,6 @@ class EventsIndex extends Component {
 				]				
 			}
 		};
-
-		var clubOption
 
 		// this.stateSet({events: this.props.events})
 		let events = this.props.events;
@@ -121,6 +115,14 @@ class EventsIndex extends Component {
 	}
 
 	render() {
+
+		const result = sqip({
+			filename: '../../../img/martin-garrix.jpg',
+			numberOfPrimitives: 8
+		})
+
+
+		console.log("tested", result)
 		return (
 			<Grid>
 				<Row>

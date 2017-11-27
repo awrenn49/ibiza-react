@@ -6,6 +6,7 @@ import EventsReducer from './reducer_events';
 import ImagesReducer from './reducer_images';
 import MerchandiseReducer from './reducer_merchandise'
 import NavBarReducer from './reducer_nav_bar';
+import PersistReducer from './reducer_persist'
 const rootReducer = combineReducers({
   club: ClubReducer,
   clubs: ClubsReducer,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   form : formReducer,
   images: ImagesReducer,
   merchandise: MerchandiseReducer,
-  navBarClubs: NavBarReducer
+  navBarClubs: NavBarReducer,
+  persist: PersistReducer
 });
 
 export default rootReducer;

@@ -33,5 +33,9 @@ module.exports = {
     inline: false,
     historyApiFallback: true,
     contentBase: './'
+  },
+  node : {
+    fs : 'empty',
+    child_process: 'empty'
   }
 };

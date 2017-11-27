@@ -1,23 +1,251 @@
+font-family: 'Roboto', sans-serif;
+font-family: 'Spectral SC', serif;
+
+html, body {
+  margin: 0;
+  width : 100%;
+}
+
+@media all and (min-width:960px) and (min-width: 1024px) {
+  /* put your css styles in here */
+  .test1 {
+    padding-right:; 20 px;
+    border-right: 1px solid #ccc;
+  }
+}
+
+
+.close-icon {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 15px;
+}
+
+.activity-description {
+  font-size: 24px;
+  font-family: 'proxima_nova_rgbold';
+  text-transform: uppercase;
+  line-height: 35px;
+  letter-spacing: 5px;
+  color: #111;
+  text-align: center;
+}
+.activity-image {
+  height: 240px;
+  width: 100%;
+}
+
+.border-between > .test1:first-child:before {
+   display: none;
+}
+
+.card-section-form {
+  width: 100%;
+}
+
+.confirm-button {
+  width: 100%;
+  height: 38px;
+  background-color: #9d9d9d;
+  font-weight: bold;
+}
+
+.club-link {
+  font-weight: bold;
+  color: black
+}
+
+.center-header {
+  text-align: center;
+}
+
+.club-link {
+  background-color: green;
+}
+
+.container {
+  margin: 0;
+  width: 100%;
+}
+
+.description {
+  font-family: "Arial", Arial, sans-serif;
+  text-align: center;
+}
+
+.event {
+  margin: 20px;
+  text-align: center;
+}
+
+.event-description {
+  font-size : 15px;
+  font-weight: 8px;
+}
+
+.event-image {
+  display:block;
+  margin:auto;
+}
 
 
 .home {
   background-color: #e9ebee;
 }
-.event {
-	margin: 20px;
-	text-align: center;
+
+.merchandise-block {
+  border-color: black;
+  border-radius: : 1px;
+  padding-bottom: 5px;
 }
 
-.event-image {
-    display:block;
-    margin:auto;
+.merchandise-container {
+  height: 300px;
+  width: 300px;
+  margin-left:auto;
+  margin-right:auto;
+  display:block;
 }
 
-.description {
-	font-family: "Arial", Arial, sans-serif;
-	text-align: center;
+.merchandise-container .merchandise-image{
+  max-height: 100%;
+  width: 100%;
+  margin-left:auto;
+  margin-right:auto;
+  display:block;
 }
- 
+
+.merchandise-modal-container {
+  height: 450px;
+  width: 450px;
+  margin-left:auto;
+  margin-right:auto;
+  display:block;
+}
+
+.merchandise-modal-container .merchandise-modal-image{
+  max-height: 100%;
+  width: 100%;
+  margin-left:auto;
+  margin-right:auto;
+  display:block;
+}
+
+
+.merchandise-image {
+}
+
+.merchandise-store-title {
+  font-family: 'Spectral SC', serif;
+
+}
+
+.merchandise-title {
+  text-align: center;
+  font-family: 'Spectral SC', serif;
+  font-weight: bold
+  font-size: 25px;
+}
+
+.merchandise-modal-item {
+  display: block;
+
+}
+
+
+.text-help {
+  color: red;
+}
+
+
+
+
+
+
+/* TOP */
+
+form {
+  width: 100%;
+  margin: 20px auto;
+}
+
+.CardField {
+  color: #0000FF;
+  background-color: #0000FF;
+}
+
+label {
+  position: relative;
+  color: #6A7C94;
+  font-weight: 400;
+  height: 48px;
+  line-height: 48px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+label > span {
+  float: left;
+}
+
+.field {
+  background: white;
+  box-sizing: border-box;
+  font-weight: 400;
+  border: 1px solid #CFD7DF;
+  border-radius: 24px;
+  color: #32315E;
+  outline: none;
+  height: 48px;
+  line-height: 48px;
+  padding: 0 20px;
+  cursor: text;
+  width: 76%;
+  float: right;
+}
+
+.field::-webkit-input-placeholder { color: #CFD7DF; }
+.field::-moz-placeholder { color: #CFD7DF; }
+.field:-ms-input-placeholder { color: #CFD7DF; }
+
+.field:focus,
+.field.StripeElement--focus {
+  border-color: #F99A52;
+}
+
+
+.outcome {
+  float: left;
+  width: 100%;
+  padding-top: 8px;
+  min-height: 20px;
+  text-align: center;
+}
+
+.success, .error {
+  display: none;
+  font-size: 13px;
+}
+
+.success.visible, .error.visible {
+  display: inline;
+}
+
+.error {
+  color: #E4584C;
+}
+
+.success {
+  color: #F8B563;
+}
+
+.success .token {
+  font-weight: 500;
+  font-size: 13px;
+}
+
+/* BOTTOM */
 
 
 //navigation bar

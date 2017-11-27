@@ -24,7 +24,6 @@ class ClubHeader extends Component {
 	}
 
 	render() {
-		console.log("this props", this.props)
 		const selectedClub = this.props.selectedClub;
 		if(selectedClub[0]){
 			var imageURL = selectedClub[0].logoURL;
@@ -37,7 +36,6 @@ class ClubHeader extends Component {
 
 
 function mapStateToProps(state){
-	console.log("THIS STATE", state)
 	return { selectedClub: state.club }
 }
 export default connect(mapStateToProps, { fetchClub })(ClubHeader);
